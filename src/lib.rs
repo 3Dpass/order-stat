@@ -78,18 +78,20 @@
 //!         order_stat::median_of_medians_by(&mut v, |x, y| x.0.cmp(&y.0)).1);
 //! ```
 
+#![no_std]
 #![cfg_attr(all(test, feature = "unstable"), feature(test))]
 
 #[cfg(test)] extern crate rand;
 #[cfg(test)] extern crate quickcheck;
 #[cfg(all(test, feature = "unstable"))] extern crate test;
 
-use std::cmp::Ordering;
+use core::cmp::Ordering;
 
 #[cfg(all(test, feature = "unstable"))]
 #[macro_use]
 mod benches;
 
+extern crate libm;
 mod floyd_rivest;
 mod quickselect;
 mod mom;

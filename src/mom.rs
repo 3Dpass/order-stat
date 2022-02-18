@@ -1,5 +1,5 @@
-use std::{cmp, mem};
-use std::cmp::Ordering;
+use core::{cmp, mem};
+use core::cmp::Ordering;
 
 /// Calculate an approximate median of `array`.
 ///
@@ -81,7 +81,7 @@ pub fn median_of_medians_by<T, F>(array: &mut [T], mut cmp: F) -> (usize, &mut T
 fn median5<T, F>(array: &[T], cmp: &mut F) -> usize
     where F: FnMut(&T, &T) -> Ordering
 {
-    use std::mem;
+    use core::mem;
 
     let array = array;
     debug_assert!(array.len() == 5);

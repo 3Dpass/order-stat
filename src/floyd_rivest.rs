@@ -1,5 +1,10 @@
-use std::{cmp, ptr};
-use std::cmp::Ordering;
+use core::{cmp, ptr};
+use core::cmp::{Ordering, PartialOrd};
+
+use libm::logf as ln;
+use libm::expf as exp;
+use libm::sqrtf as sqrt;
+
 
 pub fn select<T, F>(array: &mut [T], k: usize, mut f: F)
     where F: FnMut(&T, &T) -> cmp::Ordering
@@ -11,6 +16,12 @@ pub fn select<T, F>(array: &mut [T], k: usize, mut f: F)
 const A: usize = 600;
 const B: f32 = 0.5;
 
+fn _signum(a: f32) -> f32 {
+    if a >= 0.0 { return 1f32 }
+    return -1f32;
+}
+
+
 fn select_<T, F>(array: &mut [T], cmp: &mut F, mut left: usize, mut right: usize, k: usize)
     where F: FnMut(&T, &T) -> cmp::Ordering
 {
@@ -19,10 +30,10 @@ fn select_<T, F>(array: &mut [T], cmp: &mut F, mut left: usize, mut right: usize
         if right - left > A {
             let n = (right - left + 1) as f32;
             let i = (k - left + 1) as f32;
-            let z = n.ln();
-            let s = B * (z * (2.0 / 3.0)).exp();
+            let z = ln(n);
+            let s = B * exp(z * (2.0 / 3.0));
             let sn = s / n;
-            let sd = B * (z * s * (1.0 - sn)).sqrt() * (i - n * 0.5).signum();
+            let sd = B * sqrt(z * s * (1.0 - sn)) * _signum(i - n * 0.5);
 
             let isn = i * s / n;
             let inner = k as f32 - isn + sd;

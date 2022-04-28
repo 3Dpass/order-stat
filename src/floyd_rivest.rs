@@ -1,5 +1,5 @@
 use core::{cmp, ptr};
-use core::cmp::{Ordering, PartialOrd};
+use core::cmp::Ordering;
 
 use libm::logf as ln;
 use libm::expf as exp;

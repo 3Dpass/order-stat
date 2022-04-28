@@ -81,7 +81,6 @@ pub fn median_of_medians_by<T, F>(array: &mut [T], mut cmp: F) -> (usize, &mut T
 fn median5<T, F>(array: &[T], cmp: &mut F) -> usize
     where F: FnMut(&T, &T) -> Ordering
 {
-    use core::mem;
 
     let array = array;
     debug_assert!(array.len() == 5);

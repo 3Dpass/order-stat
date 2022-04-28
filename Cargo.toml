@@ -15,7 +15,7 @@ and estimate a median via the median-of-medians algorithm.
 """
 
 [dependencies]
-std = { package = "sp-std", default-features = false, git = 'https://github.com/paritytech/substrate.git', tag = 'monthly-2021-11-1', version = '4.0.0-dev' }
+# std = { package = "sp-std", default-features = false, git = 'https://github.com/paritytech/substrate.git', tag = 'monthly-2021-11-1', version = '4.0.0-dev' }
 libm = { version = "0.2" }
 
 [features]
@@ -24,4 +24,3 @@ unstable = []
 [dev-dependencies]
 rand = "0.3"
 quickcheck = "0.2"
-#quickcheck_macros = "0.2"
